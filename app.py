@@ -90,5 +90,30 @@ def add(index):
     db.session.commit()
     return render_template('class_search.html', print = search_results)
 
+@app.route('/myclasses')
+def myclasses():
+    monday_classes = course_grouping.query.filter(course_grouping.days.contains("Mo")).all()
+    monday_classes.extend(course_grouping.query.filter(course_grouping.recitation_day.contains("Mo"),
+                                                       course_grouping.days.not_like('%Mo%')).all())
+
+    tuesday_classes = course_grouping.query.filter(course_grouping.days.contains("Tu")).all()
+    tuesday_classes.extend(course_grouping.query.filter(course_grouping.recitation_day.contains("Tu"),
+                                                        course_grouping.days.not_like('%Tu%')).all())
+
+    wednesday_classes = course_grouping.query.filter(course_grouping.days.contains("We")).all()
+    wednesday_classes.extend(course_grouping.query.filter(course_grouping.recitation_day.contains("We"),
+                                                          course_grouping.days.not_like('%We%')).all())
+
+    thursday_classes = course_grouping.query.filter(course_grouping.days.contains("Th")).all()
+    thursday_classes.extend(course_grouping.query.filter(course_grouping.recitation_day.contains("Th"),
+                                                         course_grouping.days.not_like('%Th%')).all())
+
+    friday_classes = course_grouping.query.filter(course_grouping.days.contains("Fr")).all()
+    friday_classes.extend(course_grouping.query.filter(course_grouping.recitation_day.contains("Fr"),
+                                                       course_grouping.days.not_like('%Fr%')).all())
+
+    return render_template('myclasses.html', mo=monday_classes, tu=tuesday_classes, we=wednesday_classes,
+                            th=thursday_classes, fr=friday_classes)
+
 if __name__ == "__main__":
     app.run(debug=True)

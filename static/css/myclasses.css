@@ -1,0 +1,35 @@
+#schedule{
+    width:75%;
+    height:80%;
+    display:inline-block;
+}
+
+#monday_classes{
+    float:left;
+    width:20%;
+    height: 100%;
+}
+
+#tuesday_classes{
+    float:left;
+    width:20%;
+    height: 100%;
+}
+
+#wednesday_classes{
+    float:left;
+    width:20%;
+    height: 100%;
+}
+
+#thursday_classes{
+    float:left;
+    width:20%;
+    height: 100%;
+}
+
+#friday_classes{
+    float:left;
+    width:20%;
+    height: 100%;
+}

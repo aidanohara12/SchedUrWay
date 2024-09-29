@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>My Classes</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/myclasses.css')}}">
+{% endblock %}
+
+{% block body %}
+<center>
+<div id="schedule">
+    <div id="monday_classes">
+        <h3>Monday Classes</h3>
+        {% for class in mo %}
+            {% if 'Mo' in class.days %}
+                <p>{{class.subject}}{{class.course_code}} {{class.start_time}} - {{class.end_time}}</p>
+            {% endif %}
+            {% if 'Mo' in class.recitation_day %}
+                <p>{{class.subject}}{{class.course_code}} {{class.recitation_start_time}} - {{class.recitation_end_time}}</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div id="tuesday_classes">
+        <h3>Tuesday Classes</h3>
+        {% for class in tu %}
+            {% if 'Tu' in class.days %}
+                <p>{{class.subject}}{{class.course_code}} {{class.start_time}} - {{class.end_time}}</p>
+            {% endif %}
+            {% if 'Tu' in class.recitation_day %}
+                <p>{{class.subject}}{{class.course_code}} {{class.recitation_start_time}} - {{class.recitation_end_time}}</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div id="wednesday_classes">
+        <h3>Wednesday Classes</h3>
+        {% for class in we %}
+            {% if 'We' in class.days %}
+                <p>{{class.subject}}{{class.course_code}} {{class.start_time}} - {{class.end_time}}</p>
+            {% endif %}
+            {% if 'We' in class.recitation_day %}
+                <p>{{class.subject}}{{class.course_code}} {{class.recitation_start_time}} - {{class.recitation_end_time}}</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div id="thursday_classes">
+        <h3>Thursday Classes</h3>
+        {% for class in th %}
+            {% if 'Th' in class.days %}
+                <p>{{class.subject}}{{class.course_code}} {{class.start_time}} - {{class.end_time}}</p>
+            {% endif %}
+            {% if 'Th' in class.recitation_day %}
+                <p>{{class.subject}}{{class.course_code}} {{class.recitation_start_time}} - {{class.recitation_end_time}}</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div id="friday_classes">
+        <h3>Friday Classes</h3>
+        {% for class in fr %}
+            {% if 'Fr' in class.days %}
+                <p>{{class.subject}}{{class.course_code}} {{class.start_time}} - {{class.end_time}}</p>
+            {% endif %}
+            {% if 'Fr' in class.recitation_day %}
+                <p>{{class.subject}}{{class.course_code}} {{class.recitation_start_time}} - {{class.recitation_end_time}}</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+</center>
+{% endblock %}
