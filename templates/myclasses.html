@@ -14,8 +14,10 @@
             {% if 'Mo' in class.days %}
                 <p>{{class.subject}}{{class.course_code}} {{class.start_time}} - {{class.end_time}}</p>
             {% endif %}
-            {% if 'Mo' in class.recitation_day %}
-                <p>{{class.subject}}{{class.course_code}} {{class.recitation_start_time}} - {{class.recitation_end_time}}</p>
+            {% if class.recitation_day is not none %}
+                {% if 'Mo' in class.recitation_day %}
+                    <p>{{class.subject}}{{class.course_code}} {{class.recitation_start_time}} - {{class.recitation_end_time}}</p>
+                {% endif %}
             {% endif %}
         {% endfor %}
     </div>
@@ -25,8 +27,10 @@
             {% if 'Tu' in class.days %}
                 <p>{{class.subject}}{{class.course_code}} {{class.start_time}} - {{class.end_time}}</p>
             {% endif %}
-            {% if 'Tu' in class.recitation_day %}
-                <p>{{class.subject}}{{class.course_code}} {{class.recitation_start_time}} - {{class.recitation_end_time}}</p>
+            {% if class.recitation_day is not none %}
+                {% if 'Tu' in class.recitation_day %}
+                    <p>{{class.subject}}{{class.course_code}} {{class.recitation_start_time}} - {{class.recitation_end_time}}</p>
+                {% endif %}
             {% endif %}
         {% endfor %}
     </div>
@@ -36,8 +40,10 @@
             {% if 'We' in class.days %}
                 <p>{{class.subject}}{{class.course_code}} {{class.start_time}} - {{class.end_time}}</p>
             {% endif %}
-            {% if 'We' in class.recitation_day %}
-                <p>{{class.subject}}{{class.course_code}} {{class.recitation_start_time}} - {{class.recitation_end_time}}</p>
+            {% if class.recitation_day is not none %}
+                {% if 'We' in class.recitation_day %}
+                    <p>{{class.subject}}{{class.course_code}} {{class.recitation_start_time}} - {{class.recitation_end_time}}</p>
+                {% endif %}
             {% endif %}
         {% endfor %}
     </div>
@@ -47,8 +53,10 @@
             {% if 'Th' in class.days %}
                 <p>{{class.subject}}{{class.course_code}} {{class.start_time}} - {{class.end_time}}</p>
             {% endif %}
-            {% if 'Th' in class.recitation_day %}
-                <p>{{class.subject}}{{class.course_code}} {{class.recitation_start_time}} - {{class.recitation_end_time}}</p>
+            {% if class.recitation_day is not none %}
+                {% if 'Th' in class.recitation_day %}
+                    <p>{{class.subject}}{{class.course_code}} {{class.recitation_start_time}} - {{class.recitation_end_time}}</p>
+                {% endif %}
             {% endif %}
         {% endfor %}
     </div>
@@ -58,8 +66,10 @@
             {% if 'Fr' in class.days %}
                 <p>{{class.subject}}{{class.course_code}} {{class.start_time}} - {{class.end_time}}</p>
             {% endif %}
-            {% if 'Fr' in class.recitation_day %}
-                <p>{{class.subject}}{{class.course_code}} {{class.recitation_start_time}} - {{class.recitation_end_time}}</p>
+            {% if class.recitation_day is not none %}
+                {% if 'Fr' in class.recitation_day %}
+                    <p>{{class.subject}}{{class.course_code}} {{class.recitation_start_time}} - {{class.recitation_end_time}}</p>
+                {% endif %}
             {% endif %}
         {% endfor %}
     </div>

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>My Classes</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/myclasses.css')}}">
+{% endblock %}
+
+{% block body %}
+<center>
+<div id="schedule">
+    <div id="monday_classes">
+        <h3>Monday Classes</h3>
+        {% for class in mo %}
+            <p>{{class}}</p>
+        {% endfor %}
+    </div>
+    <div id="tuesday_classes">
+        <h3>Tuesday Classes</h3>
+        {% for class in tu %}
+            <p>{{class}}</p>
+        {% endfor %}
+    </div>
+    <div id="wednesday_classes">
+        <h3>Wednesday Classes</h3>
+        {% for class in we %}
+            <p>{{class}}</p>
+        {% endfor %}
+    </div>
+    <div id="thursday_classes">
+        <h3>Thursday Classes</h3>
+        {% for class in th %}
+            <p>{{class}}</p>
+        {% endfor %}
+    </div>
+    <div id="friday_classes">
+        <h3>Friday Classes</h3>
+        {% for class in fr %}
+            <p>{{class}}</p>
+        {% endfor %}
+    </div>
+</div>
+</center>
+{% endblock %}
