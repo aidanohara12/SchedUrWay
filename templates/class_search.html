@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Class Search</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/class_search.css') }}">
+{% endblock %}
+
+{% block body %}
+<form action="/" method="POST">
+    <label for="sub">Subject</label>
+    <input type="text" name="sub" id="sub">
+    <label for="code">Course Number</label>
+    <input type="text" name="code" id="code">
+    <input type="submit">
+</form>
+
+{% if print|length > 1 %}
+<center>
+<table>
+    <tr>
+        <th>Course ID</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Days</th>
+        <th>Recitation Start Time</th>
+        <th>Recitation End Time</th>
+        <th>Recitation Day</th>
+    </tr>
+        {% for meeting in print %}
+            <tr>
+                <td>{{ meeting.subject }}{{ meeting.course_code }}</td>
+                <td>{{ meeting.start_time }}</td>
+                <td>{{ meeting.end_time }}</td>
+                <td>{{ meeting.days }}</td>
+                <td>{{ meeting.recitation_start_time}}</td>
+                <td>{{ meeting.recitation_end_time}}</td>
+                <td>{{ meeting.recitation_day}}</td>
+                <td>
+                    <a href="/add/{{ meeting.index }}"><button>Add Class</button></a>
+                </td>
+            </tr>
+        {% endfor %}
+</table>
+</center>
+{% endif %}
+{% endblock %}

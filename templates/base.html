@@ -2,9 +2,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     {% block head %}{% endblock %}
 </head>
 <body>
+    <div class="dropdown">
+        <img src="{{ url_for('static', filename='images/dropdown-1.png') }}" class="dropbtn">
+        <div class="drop_content">
+            <a href="/">Class Search</a>
+            <a href="/myclasses">My Classes</a>
+        </div>
+    </div>
     {% block body %}{% endblock %}
 </body>
 </html>
