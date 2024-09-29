@@ -5,3 +5,5 @@ gevent
 urllib3
 requests
 datetime
+openai
+dotenv

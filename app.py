@@ -1,7 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for
-from PittAPI import course as pitt
+from pittapi import course as pitt
 from flask_sqlalchemy import SQLAlchemy
 import datetime
+
+from openai import OpenAI
+from dotenv import load_dotenv
+
+load_dotenv()
+
+client = OpenAI()
+
 
 app = Flask(__name__)
 db = SQLAlchemy()
@@ -88,7 +96,33 @@ def add(index):
 
     db.session.add(class_to_add)
     db.session.commit()
-    return render_template('class_search.html', print = search_results)
+    
+    added_class = course_grouping.query.all()
+
+    class_to_be_scheduled = []
+    
+    for added in added_class :
+        class_name = f"{added.subject} {added.course_code}, Days: {added.days}, Start time {added.start_time}, End Time {added.end_time}, Recitaion Day: {added.recitation_day}, Recitaion Start: {added.recitation_start_time}, Recitaion End: {added.recitation_end_time}"
+        class_to_be_scheduled.append(class_name)
+
+    class_gpt = ""
+    for message in class_to_be_scheduled:
+        class_gpt = class_gpt + " " + message
+
+    response = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "You are a schedule builder"},
+            {"role": "user", "content": f"Please create a comprehensive class schedule for the upcoming semester that includes the following classes and their respective times. Ensure there are no overlapping classes, and every selected class is consistent in timing throughout the semester. If there are any overlaps, please select alternative options or omit conflicting classes. Each class must only occur on the specified days. The classes are in the Format 'Class, Days(MoTuWeThFr),Startime, endtime, recitation day, recitation start time, recitation end time " + class_gpt + ". Steps to follow exactly. do not change the steps. 1. Chose class 2. See dates and times and chose a time option of times and fill out the schedule for every date assigned for that class. 3. go to next class 4. Select that classes date and time 5. if that class would overlap with a class currently on the schedule then chose another time given. If that time also overlaps, then go back to the other class and remove it from the schedule and chose another time given and fill the schedule back out for all times day days for that class. If then the chosen class has no overlaps then add it to the schedule and move to step 3. (ex a class from 10-11 overlaps with a class from 10:30-11:30) (ex a class from 10-11 also overlaps with a class from 11-12) please give me the schedule in the format 'Mon Class(Times)!Class(Times)!,Tues Class(Times)!Class(Times)!,Wed Class(Times)!Class(Times)!,Thur Class(Times)!Class(Times)!,Fri Class(Times)!Class(Times)!' This output should be one line and the only thing ever returned. if a day has no classes just say 'Mon Class(Times)!Class(Times)!,Tues,Wed Class(Times)!Class(Times)!' for every day of the week. If a class does not fit in schedule after running algorithm just leave it out."}
+        ]
+    )
+
+    output = response.choices[0].message.content
+    
+    
+    
+    
+    return render_template('class_search.html', print = search_results, ai_output = output)
 
 @app.route('/myclasses')
 def myclasses():
